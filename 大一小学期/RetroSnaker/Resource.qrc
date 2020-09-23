@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>icon.jpg</file>
+        <file>RetroSnake.ico</file>
+        <file>begin.ico</file>
+        <file>exit.ico</file>
+        <file>load.ico</file>
+        <file>rebeg.ico</file>
+        <file>save.ico</file>
+        <file>stop.ico</file>
+    </qresource>
+    <qresource prefix="/picture">
+        <file>bg.jpg</file>
+    </qresource>
+</RCC>
