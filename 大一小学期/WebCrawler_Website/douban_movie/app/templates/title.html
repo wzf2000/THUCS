@@ -1,0 +1,10 @@
+{% if config.type == 'index' %}
+    <h1 itemprop="name">
+        <a class="article-title" href="{{post_url}}" target="_blank" itemprop="url">
+            {{post_title}}
+        </a>
+{% else %}
+    <h1 class="article-title" itemprop="name">
+        {{post_title}}
+    </h1>
+{% endif %}

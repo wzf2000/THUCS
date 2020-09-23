@@ -1,0 +1,90 @@
+<header class="article-header">
+    {% include 'title.html' with post_url=config.url post_title=config.title %}
+</header>
+{% load rand %}
+<div class="article-entry" itemprop="articleBody">
+    <div id="content">
+        <div class="grid">
+            <div class="article">
+                <div id="movies" class="mod">
+                    <div class="hd">
+                        <h2>{{config.title}}</h2>
+                    </div>
+                    <div class="bd">
+                        <ul class="list-s">
+                        {% for movie in movies %}
+                            <li class="li-style-{{1|rand_style:11}}">
+                                <div class="pic">
+                                    <a href="{{movie.url}}">
+                                        <img class alt="{{movie.title}}" src="{{movie.image_url}}"/>
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <a href="{{movie.url}}">{{movie.title}}</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-c">
+            <div class="navigation pagination" role="navigation">
+                <div class="nav-links mdc-elevation--z1">
+                    <div class="prev-navigation">
+                    {% if now != 1 %}
+                        <a href="/page/{{prev}}">
+                            <i class="fa fa-arrow-circle-left"></i>
+                        </a>
+                    {% endif %}
+                    </div>
+                    <div class="numbers-navigation">
+                    {% for i in list %}
+                        {% if i == 1 %}
+                            {% if i == now %}
+                                <span aria-current="page" class="page-numbers current">{{i}}</span>
+                            {% else %}
+                                <a class="page-numbers" href="/page/{{i}}">{{i}}</a>
+                            {% endif %}
+                        {% elif i == all %}
+                            {% if i == now %}
+                                <span aria-current="page" class="page-numbers current">{{i}}</span>
+                            {% else %}
+                                <a class="page-numbers" href="/page/{{i}}">{{i}}</a>
+                            {% endif %}
+                        {% elif i == prev_dots %}
+                            <span class="page-numbers dots">...</span>
+                        {% elif i == next_dots %}
+                            <span class="page-numbers dots">...</span>
+                        {% elif i == now %}
+                            <span aria-current="page" class="page-numbers current">{{i}}</span>
+                        {% elif i > prev_dots and i < next_dots %}
+                            <a class="page-numbers" href="/page/{{i}}">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
+                        <div class="any">
+                            <span>跳转至</span>
+                            <input type="number" id="jump-page" placeholder="1~{{all}}"/>
+                            <script>
+                                $('#jump-page').keydown(function(e) {
+                                    if (e.keyCode == 13) {
+                                        window.location.href = '/page/' + $('#jump-page').val();
+                                    }
+                                })
+                            </script>
+                            <span>页</span>
+                        </div>
+                    </div>
+                    <div class="next-navigation">
+                    {% if now != all %}
+                        <a href="/page/{{next}}">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

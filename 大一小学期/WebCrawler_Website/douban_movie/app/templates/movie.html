@@ -1,0 +1,79 @@
+<header class="article-header">
+    {% include 'title.html' with post_url=config.url post_title=movie.title %}
+</header>
+{% load rand %}
+<div class="article-entry" itemprop="articleBody">
+    <div id="content">
+        <div class="grid">
+            <div class="article">
+                <div id="headline" class="item">
+                    <div class="pic">
+                        <a class="nbg" title="{{movie.title}}" href="{{movie.image_url}}">
+                            <img alt="{{movie.name}}" title="点击看大图" src="{{movie.image_url}}"/>
+                        </a>
+                    </div>
+                    <div class="info">
+                        <ul>
+                        {% for meta in movie.meta %}
+                            <li>
+                                <span>{{meta.name}}</span>: {{meta.value}}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div id="intro" class="mod">
+                    <div class="hd">
+                        <h2>剧情简介</h2>
+                    </div>
+                    <div class="bd">
+                    {% for item in movie.intro %}
+                        <p>
+                            {{item}}
+                        </p>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div id="actors" class="mod">
+                    <div class="hd">
+                        <h2>演员</h2>
+                    </div>
+                    <div class="bd">
+                        <ul class="list-s">
+                        {% for actor in movie.actors %}
+                            <li class="li-style-{{1|rand_style:11}}">
+                                <div class="pic">
+                                    <a href="{{actor.url}}">
+                                        <img class alt="{{actor.name}}" src="{{actor.image_url}}"/>
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <a href="{{actor.url}}">{{actor.name}}</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div id="reviews" class="mod">
+                    <div class="hd">
+                        <h2>影评</h2>
+                    </div>
+                    <div class="bd">
+                        <div id="hot-comments" class="tab">
+                        {% for review in movie.reviews %}
+                            <div class="comment-item">
+                                <div class="comment">
+                                    <p>
+                                        {{review}}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

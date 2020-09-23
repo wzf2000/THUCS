@@ -1,0 +1,88 @@
+<header class="article-header">
+    {% include 'title.html' with post_url=config.url post_title=config.title %}
+</header>
+<div class="article-entry" itemprop="articleBody">
+    <div id="content">
+        <div class="grid">
+            <div class="article">
+            {% if not error %}
+                <div class="nums">
+                    <span class="nums_text">为您找到结果{{count}}个，共耗时{{time}}秒</span>
+                </div>
+            {% endif %}
+                <div id="reviews" class="mod">
+                    <div class="bd">
+                        <div id="hot-comments" class="tab">
+                        {% for review in reviews %}
+                            <div class="comment-item">
+                                <div class="comment">
+                                    <a href="{{review.url}}">{{review.text}}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if all > 1 %}
+        <div class="navigation-c">
+            <div class="navigation pagination" role="navigation">
+                <div class="nav-links mdc-elevation--z1">
+                    <div class="prev-navigation">
+                    {% if now != 1 %}
+                        <a href="/reviews/search/page/{{prev}}{{argv}}">
+                            <i class="fa fa-arrow-circle-left"></i>
+                        </a>
+                    {% endif %}
+                    </div>
+                    <div class="numbers-navigation">
+                    {% for i in list %}
+                        {% if i == 1 %}
+                            {% if i == now %}
+                                <span aria-current="page" class="page-numbers current">{{i}}</span>
+                            {% else %}
+                                <a class="page-numbers" href="/reviews/search/page/{{i}}{{argv}}">{{i}}</a>
+                            {% endif %}
+                        {% elif i == all %}
+                            {% if i == now %}
+                                <span aria-current="page" class="page-numbers current">{{i}}</span>
+                            {% else %}
+                                <a class="page-numbers" href="/reviews/search/page/{{i}}{{argv}}">{{i}}</a>
+                            {% endif %}
+                        {% elif i == prev_dots %}
+                            <span class="page-numbers dots">...</span>
+                        {% elif i == next_dots %}
+                            <span class="page-numbers dots">...</span>
+                        {% elif i == now %}
+                            <span aria-current="page" class="page-numbers current">{{i}}</span>
+                        {% elif i > prev_dots and i < next_dots %}
+                            <a class="page-numbers" href="/reviews/search/page/{{i}}{{argv}}">{{i}}</a>
+                        {% endif %}
+                    {% endfor %}
+                        <div class="any">
+                            <span>跳转至</span>
+                            <input type="number" id="jump-page" placeholder="1~{{all}}"/>
+                            <script>
+                                $('#jump-page').keydown(function(e) {
+                                    if (e.keyCode == 13) {
+                                        window.location.href = '/reviews/search/page/' + $('#jump-page').val() + '{{argv}}';
+                                    }
+                                })
+                            </script>
+                            <span>页</span>
+                        </div>
+                    </div>
+                    <div class="next-navigation">
+                    {% if now != all %}
+                        <a href="/reviews/search/page/{{next}}{{argv}}">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>

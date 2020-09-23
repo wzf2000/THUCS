@@ -1,0 +1,54 @@
+<div id="global-nav" class="global-nav">
+    <div class="bd">
+        <div class="global-nav-items">
+            <ul>
+                <li>
+                    <a href="/">电影</a>
+                </li>
+                <li>
+                    <a href="/actors/">演员</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="nav-wrap">
+    <div class="nav-primary">
+        <div class="nav-logo">
+        </div>
+        <div class="nav-search">
+            <select name="type" id="search-type">
+            {% if config.search_type == 'movies' %}
+                <option selected="selected" value="movies">电影</option>
+            {% else %}
+                <option value="movies">电影</option>
+            {% endif %}
+            {% if config.search_type == 'actors' %}
+                <option selected="selected" value="actors">演员</option>
+            {% else %}
+                <option value="actors">演员</option>
+            {% endif %}
+            {% if config.search_type == 'reviews' %}
+                <option selected="selected" value="reviews">影评</option>
+            {% else %}
+                <option value="reviews">影评</option>
+            {% endif %}
+            </select>
+            <script>
+                $('#search-type').change(function() {
+                    $('#search-form').attr('action', '/' + $(this).val() + '/search');
+                })
+            </script>
+            <form action="/{{config.search_type}}/search" method="get" id="search-form">
+                <fieldset>
+                    <div class="inp">
+                        <input id="inp-query" name="search_text" size="22" maxlength="20" placeholder="搜索电影、演员" value="{{search}}"/>
+                    </div>
+                    <div class="inp-btn">
+                        <input type="submit" value="搜索"/>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

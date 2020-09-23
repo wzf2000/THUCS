@@ -1,0 +1,29 @@
+{% include 'head.html' %}
+<body>
+    <div class="container">
+        {% include 'navigation-bar.html' %}
+        {% if config.type == 'movie' %}
+            {% include 'movie.html' %}
+        {% endif %}
+        {% if config.type == 'actor' %}
+            {% include 'actor.html' %}
+        {% endif %}
+        {% if config.type == 'movies' %}
+            {% include 'movies.html' %}
+        {% endif %}
+        {% if config.type == 'actors' %}
+            {% include 'actors.html' %}
+        {% endif %}
+        {% if config.type == 'search_movies' %}
+            {% include 'search_movies.html' %}
+        {% endif %}
+        {% if config.type == 'search_actors' %}
+            {% include 'search_actors.html' %}
+        {% endif %}
+        {% if config.type == 'search_reviews' %}
+            {% include 'search_reviews.html' %}
+        {% endif %}
+        {% include 'footer.html'%}
+    </div>
+</body>
+</html>
