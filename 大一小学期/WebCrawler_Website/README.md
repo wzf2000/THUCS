@@ -4,6 +4,8 @@
 
 ---
 
+目前网站在 [http://douban.wzf2000.top](http:douban.wzf2000.top) 下运行。
+
 ### 1. 项目基本结构
 
 #### 1.1. 影视爬虫部分预览
