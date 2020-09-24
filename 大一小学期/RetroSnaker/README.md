@@ -216,7 +216,7 @@ QPushButton {
     line-height: 40px;
     padding: 0 30px;
 	font-weight: 400;
-	font-family: &quot;华文行楷&quot;;
+	font-family: "华文行楷";
 	text-decoration: none;
 	text-align: center;
 	margin: 5px;
