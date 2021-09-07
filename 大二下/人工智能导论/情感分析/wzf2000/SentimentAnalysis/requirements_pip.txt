@@ -1,0 +1,32 @@
+altgraph @ file:///home/linux1/recipes/ci/altgraph_1611055153312/work
+certifi==2020.12.5
+cycler==0.10.0
+jieba==0.42.1
+joblib==1.0.1
+kiwisolver @ file:///opt/concourse/worker/volumes/live/0b2f3e77-eaa3-4995-7dd0-c994762fcbde/volume/kiwisolver_1612282417472/work
+macholib @ file:///home/linux1/recipes/ci/macholib_1611055836792/work
+matplotlib @ file:///opt/concourse/worker/volumes/live/41e8cd50-031f-4dda-5787-dd3c4f4e0f08/volume/matplotlib-suite_1613407855571/work
+mkl-fft==1.3.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy==1.20.3
+olefile==0.46
+pandas==1.2.3
+Pillow @ file:///opt/concourse/worker/volumes/live/b6dec6d8-7e9d-4d46-615c-691883c22eae/volume/pillow_1615057391629/work
+pycryptodome @ file:///opt/concourse/worker/volumes/live/f98c3e7b-3d65-4ec7-751e-65b6202edf38/volume/pycryptodome_1613764571210/work
+PyInstaller==3.6
+pyparsing @ file:///home/linux1/recipes/ci/pyparsing_1610983426697/work
+pypinyin==0.41.0
+python-dateutil @ file:///home/ktietz/src/ci/python-dateutil_1611928101742/work
+pytz @ file:///tmp/build/80754af9/pytz_1612215392582/work
+scikit-learn==0.24.2
+scipy==1.6.3
+six @ file:///opt/concourse/worker/volumes/live/5b31cb27-1e37-4ca5-6e9f-86246eb206d2/volume/six_1605205320872/work
+sklearn==0.0
+threadpoolctl==2.1.0
+torch==1.8.0
+torchaudio==0.8.0a0+a751e1d
+torchvision==0.9.0
+tornado @ file:///opt/concourse/worker/volumes/live/05341796-4198-4ded-4a9a-332fde3cdfd1/volume/tornado_1606942323372/work
+tqdm==4.59.0
+typing-extensions @ file:///home/ktietz/src/ci_mi/typing_extensions_1612808209620/work
