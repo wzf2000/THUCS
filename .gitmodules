@@ -1,3 +1,6 @@
 [submodule "大二下/计算机图形学基础/SPPM"]
 	path = 大二下/计算机图形学基础/SPPM
 	url = https://github.com/wzf2000/SPPM.git
+[submodule "大二下/数字逻辑设计/Project"]
+	path = 大二下/数字逻辑设计/Project
+	url = https://git.tsinghua.edu.cn/digital-design-lab/2021-spring/digital-design-grp-11.git
