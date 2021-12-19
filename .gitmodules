@@ -3,4 +3,4 @@
 	url = https://github.com/wzf2000/SPPM.git
 [submodule "大二下/数字逻辑设计/Project"]
 	path = 大二下/数字逻辑设计/Project
-	url = https://git.tsinghua.edu.cn/digital-design-lab/2021-spring/digital-design-grp-11.git
+	url = https://github.com/wzf2000/MazeDigitalDesign.git
