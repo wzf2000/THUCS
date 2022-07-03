@@ -4,3 +4,6 @@
 [submodule "大二下/数字逻辑设计/Project"]
 	path = 大二下/数字逻辑设计/Project
 	url = https://github.com/wzf2000/MazeDigitalDesign.git
+[submodule "大三上/编译原理/Project"]
+	path = 大三上/编译原理/Project
+	url = https://github.com/wzf2000/minidecaf.git
