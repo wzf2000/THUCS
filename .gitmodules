@@ -19,3 +19,6 @@
 [submodule "大三下/操作系统/rCore-lab"]
 	path = 大三下/操作系统/rCore-lab
 	url = https://github.com/wzf2000/rCore-Tutorial-Code-2022S.git
+[submodule "大三下/数值分析/labs"]
+	path = 大三下/数值分析/labs
+	url = https://github.com/wzf2000/NumericalAnalysis.git
