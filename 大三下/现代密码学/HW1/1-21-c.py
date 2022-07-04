@@ -1,0 +1,13 @@
+from utils.utils import *
+
+cipher = 'KQEREJEBCPPCJCRKIEACUZBKRVPKRBCIBQCARBJCVFCUPKRIOFKPACUZQEPBKRXPEIIEABDKPBCPFCDCCAFIEABDKPBCPFEQPKAZBKRHAIBKAPCCIBURCCDKDCCJCIDFUIXPAFFERBICZDFKABICBBENEFCUPJCVKABPCYDCCDPKBCOCPERKIVKSCPICBRKIJPKABI'
+
+# freq = calc_freq_norm(cipher)
+# print(freq)
+
+def decode(x):
+    return num2ch(11 * (ch2num(x) + 22) % 26)
+
+for ch in cipher:
+    print(decode(ch), end='')
+print()
