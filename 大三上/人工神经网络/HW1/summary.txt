@@ -1,0 +1,82 @@
+########################
+# Additional Files
+########################
+# run_mlp_backup.py
+# solve_net_backup.py
+# data
+
+########################
+# Filled Code
+########################
+# ../codes/layers.py:1
+        self._saved_for_backward(input)
+        return np.maximum(input, 0)
+
+# ../codes/layers.py:2
+        return grad_output * (self._saved_tensor > 0).astype(float)
+
+# ../codes/layers.py:3
+        self._saved_for_backward(1 / (np.exp(-input) + 1))
+        return self._saved_tensor
+
+# ../codes/layers.py:4
+        return grad_output * self._saved_tensor * (1 - self._saved_tensor)
+
+# ../codes/layers.py:5
+        ret = 0.5 * input * (np.tanh((input + 0.044715 * (input ** 3)) * np.sqrt(2 / np.pi)) + 1)
+        input_plus = input + 1e-5
+        ret_plus = 0.5 * input_plus * (np.tanh((input_plus + 0.044715 * (input_plus ** 3)) * np.sqrt(2 / np.pi)) + 1)
+        self._saved_for_backward((ret_plus - ret) / 1e-5)
+        return ret
+
+# ../codes/layers.py:6
+        return self._saved_tensor * grad_output
+
+# ../codes/layers.py:7
+        self._saved_for_backward(input)
+        return np.matmul(np.expand_dims(input, -2), self.W).squeeze(-2) + self.b
+
+# ../codes/layers.py:8
+        self.grad_W = (np.expand_dims(grad_output, -2) * np.expand_dims(self._saved_tensor, -1)).sum(0)
+        self.grad_b = grad_output.sum(0)
+        return np.matmul(self.W, np.expand_dims(grad_output, -1)).squeeze(-1)
+
+# ../codes/loss.py:1
+        dis = input - target
+        return 0.5 * (dis ** 2).sum(-1).mean()
+
+# ../codes/loss.py:2
+        dis = input - target
+        return dis / input.shape[0]
+
+# ../codes/loss.py:3
+        exp_input = np.exp(input - input.max(-1, keepdims=True))
+        prob = exp_input / (exp_input.sum(-1, keepdims=True))
+        prob = np.clip(prob, 1e-7, 1 - 1e-7)
+        return (-np.log(prob) * target).sum(-1).mean()
+
+# ../codes/loss.py:4
+        exp_input = np.exp(input - input.max(-1, keepdims=True))
+        prob = exp_input / (exp_input.sum(-1, keepdims=True))
+        prob = np.clip(prob, 1e-7, 1 - 1e-7)
+        return (prob - target) / input.shape[0]
+
+# ../codes/loss.py:5
+        return (np.maximum((self.margin - (input * target).sum(-1, keepdims=True) + input), 0).sum(-1) - self.margin).mean()
+
+# ../codes/loss.py:6
+        grad = ((self.margin - (input * target).sum(-1, keepdims=True) + input) > 0).astype(float)
+        grad -= target * np.sum(grad, -1, keepdims=True)
+        return grad / input.shape[0]
+
+
+########################
+# References
+########################
+
+########################
+# Other Modifications
+########################
+# _codes/loss.py -> ../codes/loss.py
+# 46 +         self.margin = margin
+

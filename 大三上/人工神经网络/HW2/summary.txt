@@ -1,0 +1,189 @@
+########################
+# Filled Code
+########################
+# ../codes/cnn/model.py:1
+        self.weight = Parameter(torch.empty(num_features))
+        self.bias = Parameter(torch.empty(num_features))
+        self.register_buffer('running_mean', torch.zeros(num_features))
+        self.register_buffer('running_var', torch.ones(num_features))
+        init.ones_(self.weight)
+        init.zeros_(self.bias)
+        if self.training:
+            miu = input.mean([0, 2, 3])
+            sigma2 = input.var([0, 2, 3])
+            self.running_mean = 0.9 * self.running_mean + 0.1 * miu
+            self.running_var = 0.9 * self.running_var + 0.1 * sigma2
+        else:
+            miu = self.running_mean
+            sigma2 = self.running_var
+        output = (input - miu[:, None, None]) / torch.sqrt(sigma2[:, None, None] + 1e-5)
+        output = self.weight[:, None, None] * output + self.bias[:, None, None]
+        return output
+
+# ../codes/cnn/model.py:2
+        if self.training:
+            output = torch.bernoulli(torch.ones_like(input) * (1 - self.p)) * input
+            output = output / (1 - self.p)
+        else:
+            output = input
+
+# ../codes/cnn/model.py:3
+        self.seq = nn.Sequential(
+            nn.Conv2d(3, 64, 5),
+            BatchNorm2d(64),
+            nn.ReLU(),
+            Dropout(drop_rate),
+            nn.MaxPool2d(3, 2),
+            nn.Conv2d(64, 64, 5),
+            BatchNorm2d(64),
+            nn.ReLU(),
+            Dropout(drop_rate),
+            nn.MaxPool2d(3, 2)
+        )
+        self.fc = nn.Linear(4 * 4 * 64, 10)
+        # self.seq1 = nn.Sequential(
+        # 	nn.Conv2d(3, 256, 5),
+        # 	BatchNorm2d(256),
+        # 	nn.ReLU(),
+        # 	nn.AvgPool2d(3, 2),
+        # )
+        # self.seq2 = nn.Sequential(
+        # 	nn.Conv2d(256, 256, 1),
+        # 	BatchNorm2d(256),
+        # 	nn.ReLU(),
+        # 	nn.Conv2d(256, 256, 3, padding = 1),
+        # 	BatchNorm2d(256),
+        # 	nn.ReLU(),
+        # 	nn.Conv2d(256, 256, 1),
+        # 	BatchNorm2d(256)
+        # )
+        # self.relu = nn.ReLU()
+        # self.pool = nn.AvgPool2d(3, 2)
+        # self.fc = nn.Linear(6 * 6 * 256, 10)
+
+# ../codes/cnn/model.py:4
+        logits = self.seq(x)
+        logits = torch.reshape(logits, (logits.shape[0], -1))
+        logits = self.fc(logits)
+        # logits = self.seq1(x)
+        # logits = self.pool(self.relu(logits + self.seq2(logits)))
+        # logits = torch.reshape(logits, (logits.shape[0], -1))
+        # logits = self.fc(logits)
+
+# ../codes/mlp/model.py:1
+        self.weight = Parameter(torch.empty(num_features))
+        self.bias = Parameter(torch.empty(num_features))
+        self.register_buffer('running_mean', torch.zeros(num_features))
+        self.register_buffer('running_var', torch.ones(num_features))
+        init.ones_(self.weight)
+        init.zeros_(self.bias)
+        if self.training:
+            miu = input.mean(0)
+            sigma2 = input.var(0)
+            self.running_mean = 0.9 * self.running_mean + 0.1 * miu
+            self.running_var = 0.9 * self.running_var + 0.1 * sigma2
+        else:
+            miu = self.running_mean
+            sigma2 = self.running_var
+        output = (input - miu) / torch.sqrt(sigma2 + 1e-5)
+        output = self.weight * output + self.bias
+        return output
+
+# ../codes/mlp/model.py:2
+        if self.training:
+            output = torch.bernoulli(torch.ones_like(input) * (1 - self.p)) * input
+            output = output / (1 - self.p)
+        else:
+            output = input
+        return output
+
+# ../codes/mlp/model.py:3
+        self.classify = nn.Sequential(
+            nn.Linear(3 * 32 * 32, 512),
+            BatchNorm1d(512),
+            nn.ReLU(),
+            Dropout(drop_rate),
+            nn.Linear(512, 10)
+        )
+
+# ../codes/mlp/model.py:4
+        logits = self.classify(x)
+
+
+########################
+# References
+########################
+
+########################
+# Other Modifications
+########################
+# _codes/cnn/main.py -> ../codes/cnn/main.py
+# 119 +         train_accs = []
+# 120 +         train_losses = []
+# 121 +         val_accs = []
+# 122 +         val_losses = []
+# 156 +             train_accs.append(train_acc)
+# 157 +             train_losses.append(train_loss)
+# 158 +             val_accs.append(val_acc)
+# 159 +             val_losses.append(val_loss)
+# 160 +         import matplotlib.pyplot as plt
+# 161 +         plt.figure(figsize=(13, 6))
+# 162 +         plt.subplot(1, 2, 1)
+# 163 +         plt.ylabel(r'Loss')
+# 164 +         plt.xlabel(r'Epochs')
+# 165 +         plt.plot(range(1, args.num_epochs + 1), train_losses, label="train loss")
+# 166 +         plt.plot(range(1, args.num_epochs + 1), val_losses, label="test loss")
+# 167 +         plt.legend()
+# 168 +
+# 169 +
+# 170 +         plt.subplot(1, 2, 2)
+# 171 +         plt.ylabel(r'Accuracy/$\%$')
+# 172 +         plt.xlabel(r'Epochs')
+# 173 +         plt.plot(range(1, args.num_epochs + 1), train_accs, label="train accuracy")
+# 174 +         plt.plot(range(1, args.num_epochs + 1), val_accs, label="test accuracy")
+# 175 +         plt.legend()
+# 176 +
+# 177 +         plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.5, hspace=0.5)
+# 178 +         out_dict = {
+# 179 +             'batch_size': args.batch_size,
+# 180 +             'lr': args.learning_rate,
+# 181 +             'drop_rate': args.drop_rate
+# 182 +         }
+# 183 +         plt.savefig('__'.join([key + '=' + str(value) for key, value in out_dict.items()]) + '.png')
+# _codes/mlp/main.py -> ../codes/mlp/main.py
+# 108 -         mlp_model = Model(drop_rate=drop_rate)
+# 108 +         mlp_model = Model(drop_rate=args.drop_rate)
+# 108 ?                                     +++++
+# 119 +         train_accs = []
+# 120 +         train_losses = []
+# 121 +         val_accs = []
+# 122 +         val_losses = []
+# 156 +             train_accs.append(train_acc)
+# 157 +             train_losses.append(train_loss)
+# 158 +             val_accs.append(val_acc)
+# 159 +             val_losses.append(val_loss)
+# 160 +         import matplotlib.pyplot as plt
+# 161 +         plt.figure(figsize=(13, 6))
+# 162 +         plt.subplot(1, 2, 1)
+# 163 +         plt.ylabel(r'Loss')
+# 164 +         plt.xlabel(r'Epochs')
+# 165 +         plt.plot(range(1, args.num_epochs + 1), train_losses, label="train loss")
+# 166 +         plt.plot(range(1, args.num_epochs + 1), val_losses, label="test loss")
+# 167 +         plt.legend()
+# 168 +
+# 169 +
+# 170 +         plt.subplot(1, 2, 2)
+# 171 +         plt.ylabel(r'Accuracy/$\%$')
+# 172 +         plt.xlabel(r'Epochs')
+# 173 +         plt.plot(range(1, args.num_epochs + 1), train_accs, label="train accuracy")
+# 174 +         plt.plot(range(1, args.num_epochs + 1), val_accs, label="test accuracy")
+# 175 +         plt.legend()
+# 176 +
+# 177 +         plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.5, hspace=0.5)
+# 178 +         out_dict = {
+# 179 +             'batch_size': args.batch_size,
+# 180 +             'lr': args.learning_rate,
+# 181 +             'drop_rate': args.drop_rate
+# 182 +         }
+# 183 +         plt.savefig('__'.join([key + '=' + str(value) for key, value in out_dict.items()]) + '.png')
+

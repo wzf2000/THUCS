@@ -1,0 +1,65 @@
+########################
+# Filled Code
+########################
+# ../codes/GAN/trainer.py:1
+        D_x = self._netD(real_imgs)
+        loss_D_real = BCE_criterion(D_x, 1)
+        D_x = D_x.mean()
+        loss_D_real.backward()
+
+# ../codes/GAN/trainer.py:2
+        D_G_z1 = self._netD(fake_imgs)
+        loss_D_fake = BCE_criterion(D_G_z1, 0)
+        D_G_z1 = D_G_z1.mean()
+        loss_D_fake.backward()
+
+# ../codes/GAN/trainer.py:3
+        D_G_z2 = self._netD(fake_imgs)
+        loss_G = BCE_criterion(D_G_z2, 1)
+        D_G_z2 = D_G_z2.mean()
+
+# ../codes/GAN/GAN.py:1
+            nn.ConvTranspose2d(self.latent_dim, 4 * self.hidden_dim, 4, 1, 0),
+            nn.BatchNorm2d(4 * self.hidden_dim),
+            nn.ReLU(),
+            nn.ConvTranspose2d(4 * self.hidden_dim, 2 * self.hidden_dim, 4, 2, 1),
+            nn.BatchNorm2d(2 * self.hidden_dim),
+            nn.ReLU(),
+            nn.ConvTranspose2d(2 * self.hidden_dim, self.hidden_dim, 4, 2, 1),
+            nn.BatchNorm2d(self.hidden_dim),
+            nn.ReLU(),
+            nn.ConvTranspose2d(self.hidden_dim, 1, 4, 2, 1),
+            nn.Tanh()
+
+
+########################
+# References
+########################
+
+########################
+# Other Modifications
+########################
+# _codes/GAN/main.py -> ../codes/GAN/main.py
+# 12 + from torchvision.utils import make_grid, save_image
+# 31 -     config = 'z-{}_batch-{}_num-train-steps-{}'.format(args.latent_dim, args.batch_size, args.num_training_steps)
+# 32 +     config = 'z-{}-{}_batch-{}_num-train-steps-{}'.format(args.latent_dim, args.generator_hidden_dim, args.batch_size, args.num_training_steps)
+# 32 ?                +++                                                              +++++++++++++++++++++++++++
+# 74 -     print("FID score: {:.3f}".format(fid), flush=True)
+# 75 +     print("FID score: {:.3f}".format(fid), flush=True)
+# 75 ?                                                       +
+# 76 +
+# 77 +     if not args.do_train:
+# 78 +         for i in range(10):
+# 79 +             z1 = torch.randn(netG.latent_dim, 1, 1, device=device)
+# 80 +             z2 = torch.randn(netG.latent_dim, 1, 1, device=device)
+# 81 +             K = 9
+# 82 +             noise = torch.stack([z1 + i / K * (z2 - z1) for i in range(K + 1)], dim=0)
+# 83 +             imgs = make_grid(netG(noise)) * 0.5 + 0.5
+# 84 +             if not os.path.exists(os.path.join(args.ckpt_dir, '0')):
+# 85 +                 os.makedirs(os.path.join(args.ckpt_dir, '0'))
+# 86 +             save_image(imgs, os.path.join(args.ckpt_dir, '0', f"InterpolationSamples-{i}.png"))
+# 87 +
+# 88 +         sample_noise = torch.randn(64, netG.latent_dim, 1, 1, device=device)
+# 89 +         imgs = make_grid(netG(sample_noise)) * 0.5 + 0.5
+# 90 +         save_image(imgs, os.path.join(args.ckpt_dir, '0', "samples.png"))
+
