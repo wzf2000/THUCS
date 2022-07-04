@@ -7,3 +7,9 @@
 [submodule "大三上/编译原理/Project"]
 	path = 大三上/编译原理/Project
 	url = https://github.com/wzf2000/minidecaf.git
+[submodule "大三上/计算机组成原理/labs"]
+	path = 大三上/计算机组成原理/labs
+	url = https://github.com/wzf2000/cod21.git
+[submodule "大三上/计算机组成原理/Project"]
+	path = 大三上/计算机组成原理/Project
+	url = https://github.com/wzf2000/cod21-grp58.git
