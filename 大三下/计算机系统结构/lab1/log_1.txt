@@ -1,0 +1,14 @@
+test size = 1 KB, array length = 256, end - begin = 694.126 ms
+test size = 2 KB, array length = 512, end - begin = 689.776 ms
+test size = 4 KB, array length = 1024, end - begin = 699.79 ms
+test size = 8 KB, array length = 2048, end - begin = 689.863 ms
+test size = 16 KB, array length = 4096, end - begin = 690.996 ms
+test size = 32 KB, array length = 8192, end - begin = 691.08 ms
+test size = 64 KB, array length = 16384, end - begin = 760.013 ms
+test size = 128 KB, array length = 32768, end - begin = 777.205 ms
+test size = 256 KB, array length = 65536, end - begin = 980.036 ms
+test size = 512 KB, array length = 131072, end - begin = 1258.52 ms
+test size = 1024 KB, array length = 262144, end - begin = 1278.12 ms
+test size = 2048 KB, array length = 524288, end - begin = 1271.24 ms
+test size = 4096 KB, array length = 1048576, end - begin = 1305.3 ms
+test size = 8192 KB, array length = 2097152, end - begin = 1468.79 ms

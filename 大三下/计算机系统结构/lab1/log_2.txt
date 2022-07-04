@@ -1,0 +1,6 @@
+test block size = 4 B, step = 1, end - begin = 270.429 ms
+test block size = 8 B, step = 2, end - begin = 274.933 ms
+test block size = 16 B, step = 4, end - begin = 284.797 ms
+test block size = 32 B, step = 8, end - begin = 243.205 ms
+test block size = 64 B, step = 16, end - begin = 357.607 ms
+test block size = 128 B, step = 32, end - begin = 330.123 ms

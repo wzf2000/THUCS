@@ -1,0 +1,3 @@
+time spent for original method : 11.0443 s
+time spent for new method : 5.25172 s
+time ratio of performance optimization : 2.10298

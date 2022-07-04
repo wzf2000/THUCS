@@ -4,3 +4,5 @@
 *.log
 *.synctex.gz
 *.toc
+__pycache__
+.idea

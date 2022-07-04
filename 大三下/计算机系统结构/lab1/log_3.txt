@@ -1,0 +1,7 @@
+test number of groups = 4, block size = 4096, end - begin = 137.49 ms
+test number of groups = 8, block size = 2048, end - begin = 149.051 ms
+test number of groups = 16, block size = 1024, end - begin = 161.915 ms
+test number of groups = 32, block size = 512, end - begin = 388.322 ms
+test number of groups = 64, block size = 256, end - begin = 297.684 ms
+test number of groups = 128, block size = 128, end - begin = 261.341 ms
+test number of groups = 256, block size = 64, end - begin = 204.287 ms
